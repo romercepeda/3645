@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    
+
+</head>
+<body>
+    <div id="miDiv">
+
+    </div>
+
+    <script>
+        //comentario de una linea
+
+        /*
+        Dado un vector
+        var miPrimerVector = [24,65,45,85,78,0,46]
+        Recorrer dicho vector con un ciclo for y determinar el mayor valor.
+
+        Una vez finalizado el ciclo for mostrar por pantalla el
+        siguiente mensaje: "Valor Máximo es: XXXX"
+        */
+
+        var miPrimerVector = [100, 65, 45, 85, 78, 0, 200];
+        var mayor = miPrimerVector[0];
+        for (var k = 0; k < miPrimerVector.length; k++) {
+            if (miPrimerVector[k] > mayor)
+                mayor = miPrimerVector[k];
+        }
+        //console.log("Valor Máximo es: " + mayor);
+        document.getElementById("miDiv").innerText = "Valor Máximo es: " + mayor;
+    </script>
+
+</body>
+</html>

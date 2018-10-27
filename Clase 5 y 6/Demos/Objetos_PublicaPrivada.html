@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script>
+        var Beer2 = function () {
+            this.__name = null;
+        }
+        var Beer = function (name) {
+            var __name = name;// || "unnamed";
+
+            var setName = function (newname) {
+                if (newname) {
+                    __name = newname;
+                }
+            }
+            var getName = function () {
+
+                return __name;
+            }
+            var objeto = {
+            }
+            return {
+                getName: getName,
+                setName: setName
+            }
+        }
+        debugger;
+        var beer = new Beer("Punk IPA");
+        var beer2 = new Beer("Hoegaarden");
+        beer2.__name = "Sang de rabo de drac";
+        beer2.setName("Devil's IPA");
+        console.log(beer.getName());    // Imprime Punk IPA
+        console.log(beer2.getName());   // Imprime Devil's IPA
+        console.log(beer.__name);       // Imprime undefined
+        console.log(beer2.__name);      // Imprime Sang de rabo de drac
+    </script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script>
+        /*
+            Definir una función que determine si la cadena 
+            de texto que se le pasa como parámetro es un palíndromo, 
+            es decir, si se lee de la misma forma desde la izquierda y desde la derecha. 
+            Ejemplo de palíndromo complejo: "La ruta nos aporto otro paso natural".
+
+        */
+        function Evaluar(cadena) {
+            //var patronMayuscula = /[A-Z]/g;
+            //var patronMinuscula = /[a-z]/g;
+            var patronMayuscula = new RegExp(/[A-Z]/g);
+            var patronMinuscula = new RegExp(/[a-z]/g);
+            var tieneMayuscula = patronMayuscula.test(cadena);
+            var tieneMinuscula = patronMinuscula.test(cadena);
+
+            return (tieneMayuscula == true && tieneMinuscula == true) ?
+                "Ambas" : (tieneMayuscula == true) ? "Solo Mayusculas" : "Solo Minusculas";
+        }
+
+        function main() {
+            var cadenaEvaluar = document.getElementById('txt01').value;
+            var r = Evaluar(cadenaEvaluar);
+            document.getElementById("div01").innerText = "El texto tiene " + r;
+        }
+    </script>
+</head>
+<body>
+    <input type="text" name="txt01" id="txt01" />
+    <input type="button" name="name" value="Validat texto"
+           onclick="main()"/>
+    <div id="div01"></div>
+</body>
+</html>

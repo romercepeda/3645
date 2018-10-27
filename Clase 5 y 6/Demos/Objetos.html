@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script>
+
+
+        //Creacion de Objeto Basico
+
+        var CarroBasico = {
+            modelo: "LaFerrari",
+            marca: "Ferrari",
+            color: "Rojo",
+            anio: 2017,
+            encender: function () {
+                console.log("encender-Run run run....");
+            },
+            detener: function (encenderLueces) {
+                console.log("detener-Carro detenido");
+                if (encenderLueces == true) this.encerLucesTraceras();
+
+            },
+            encerLucesTraceras: function () {
+                console.log("encerLucesTraceras-Luces traceras encendidas");
+            },
+        };
+
+        //Creacion de objetos con un Constructor
+        function CarroConstructor(marca, modelo, anio, color) {
+
+            var _detener = function (encenderLueces) {
+                console.log("detener-Carro detenido");
+                if (encenderLueces == true) this.encerLucesTraceras();
+            }
+            var _encerLucesTraceras = function () {
+                console.log("encerLucesTraceras-Luces traceras encendidas");
+            }
+
+
+            return {
+                marca: marca,
+                modelo: modelo,
+                anio: anio,
+                color: color,
+                detener: _detener,
+                encerLucesTraceras: _encerLucesTraceras,
+                
+            }
+        }
+
+        //Creacion de objetos con un Constructor (alternativa)
+        function Çarro2Constructor(marca, modelo, anio, color) {
+            this.marca = marca;
+            this.madelo = modelo;
+            this.anio = anio;
+            this.color = color;
+
+            this.detener = function (encenderLueces) {
+                console.log("detener-Carro detenido");
+                if (encenderLueces == true) this.encerLucesTraceras();
+            }
+            this.encerLucesTraceras = function () {
+                console.log("encerLucesTraceras-Luces traceras encendidas");
+            }
+        }
+
+        function crearObjeto() {
+            //1º forma
+            CarroBasico.encender();
+            CarroBasico.detener(false)
+            CarroBasico.encerLucesTraceras();
+
+            //2º Forma (con new)
+            var miCarro = new CarroConstructor("Lamborghini", "Huracan", 2017, "Azul");
+            var miCarro2 = new Çarro2Constructor("Ferrari", "LaFerrari", 2017, "Rojo");
+        }
+
+
+        //Propiedades calculadas
+        var propName = "prop_42";   
+
+    </script>
+</head>
+<body>
+    <input type="button" onclick="crearObjeto()" value="Probar Objeto" />
+</body>
+</html> 

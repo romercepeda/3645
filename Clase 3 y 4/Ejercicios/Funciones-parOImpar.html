@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script>
+        /*
+        Escribir el código de una función a la que se pasa como parámetro 
+        un número entero y devuelve como resultado una cadena de texto 
+        que indica si el número es par o impar. Mostrar por pantalla 
+        el resultado devuelto por la función.
+        */
+        function ParOImpar(numero){
+            var tipo = (numero % 2) ? "Impar" : "Par";
+            return tipo;
+        }
+
+        function validarNumero() {
+            var numero = document.getElementById('numero').value;
+            var r = ParOImpar(numero);
+            document.getElementById('div01').innerText = r;
+        }
+
+    </script>
+</head>
+<body>
+    <input type="text" name="numero" id="numero"/>
+    <input type="button" name="name" value="Numero es Par" 
+           onclick="validarNumero()"/>
+    <div id="div01"></div>
+</body>
+</html>

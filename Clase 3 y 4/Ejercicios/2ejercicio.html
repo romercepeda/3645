@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script>
+
+        function principal(maximaVeces) {
+            var i = 0;
+            do {
+                var contrasena = prompt("Introduzca la contraseña");
+                var contrasenaConfirmada = prompt("Vuelva a Introducir la contraseña");
+                i++;
+            } while (contrasena != contrasenaConfirmada && maximaVeces > i);
+
+            if (contrasena == contrasenaConfirmada) {
+                return "Contraseña Valida";
+            } else {
+                return "Contraseña NO Valida";
+            }
+        }
+
+    </script>
+</head>
+
+<body>
+    <input type="button" name="btn01" value="Pedir Contraseñas" 
+           onclick="document.getElementById('div01').innerText = principal(1)"/>
+
+    <div id="div01">
+
+    </div>
+</body>
+</html>

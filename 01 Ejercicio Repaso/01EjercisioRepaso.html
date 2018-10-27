@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script>
+
+        function Iniciar() {
+            var nombreCompleto = '';
+
+            if (nombreCompleto == "") {
+                console.log("El nombre no es valido.");
+                console.log("");
+                
+            }
+            
+                
+
+
+            do {
+                nombreCompleto = prompt("Ingreso Nombre");
+            } while (nombreCompleto == "" );
+
+
+            if (isNaN(edad) == true)
+                alert("la edad no es un numero valido");
+                //mostrar error.. 
+
+            for (var i = 11; i < 10; i++) {
+                console.log("iteracion" + i)
+            }
+            var r = "";
+            var i =0
+            while (r != "") {
+                console.log("ejecuto el ciclo");
+                r = prompt("Valor de r por favor");
+                i++
+            }
+
+            var edad = 0;
+
+            do {
+
+            } while (true);
+
+
+            var iterador = 0
+            do {
+                edad = prompt("Ingrese Edad");
+
+                edad = (edad.toString().trim() != null && !isNaN(edad)) ? parseInt(edad) : 0;
+
+                iterador++;
+            } while (isNaN(edad) || edad == 0 ||  iterador>2);
+
+            var salario = prompt("Ingreso Ultimo Salario");
+            var anioNacimiento = new Date().getFullYear() - edad;
+            var pension = 0;
+            var porcentaje = "";
+            if (anioNacimiento < 1960) {
+                pension = salario;
+                porcentaje = "100%";
+            }
+            else if (anioNacimiento < 1967) {
+                pension = salario * 0.85;
+                porcentaje = "85%";
+            }
+            else if (anioNacimiento < 1977) {
+                pension = salario * 0.70;
+                porcentaje = "70%";
+            }
+            else
+                pension = "No aplica";
+            document.getElementById("nombreCompleto").innerHTML = nombreCompleto;
+            document.getElementById("edad").innerHTML = edad;
+            document.getElementById("anio").innerHTML = anioNacimiento;
+            document.getElementById("salario").innerHTML = salario;
+            document.getElementById("pension").innerHTML = pension;
+        }
+    </script>
+</head>
+<body onload="Iniciar()">
+    <div>Nombre completo: <span id="nombreCompleto"></span></div>
+    <div>Edad: <span id="edad"></span></div>
+    <div>Año de Nacimiento: <span id="anio"></span></div>
+    <div>Salario: <span id="salario"></span></div>
+    <div>Monto de la Pensión Otorgada: <span id="pension"></span></div>
+
+</body>
+</html>

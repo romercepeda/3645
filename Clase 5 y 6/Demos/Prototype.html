@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <script>
+        debugger;
+        function Persona(primerNombre) {
+            this.primerNombre = primerNombre;
+        }
+
+        Persona.prototype.diHola = function () {
+            alert("Hola, Soy " + this.primerNombre);
+        };
+
+        var persona1 = new Persona("Alicia");
+        var persona2 = new Persona("Sebastian");
+        var funcionSaludar = persona1.diHola;
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
