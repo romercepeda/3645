@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>ç
+    <script>
+        /*
+            La función tiene que recibir como parámetros una key y un Array y 
+            convertir el Array en JSON para guardarlo en el localStorge. 
+            La función tiene que validar los parámetros que recibe, 
+            en caso de que alguno sea incorrecto no debe romper ni guardar nada.
+            Datos de prueba:
+            var testList = ['CARLOS','GERONIMO','NICOLAS','LUCAS'] setLocalList('studentsList', testList) 
+            // Guarda la lista en el localStorage en formato JSON
+        */
+        function setLocalList(key, testList) {
+            //Validar los parametros
+            if (key != undefined && Array.isArray(testList)) {
+                try {
+                //Convertimos en JSON el vector.
+                testList = JSON.stringify(testList);
+                //Creo el localStorage
+                localStorage.setItem(key, testList);
+                } catch (e) {
+                    console.log("ERROR: ", e);
+                }
+            }
+        }
+
+
+        function main() {
+            //Creamos el vector.
+            var testList = ['CARLOS', 'GERONIMO', 'NICOLAS', 'LUCAS'];
+            
+            setLocalList('studentsList', testList);
+        }
+    </script>
+</head>
+<body>
+    <input type="button" name="name" value="Iniciar" onclick="main()" /> 
+</body>
+</html> 

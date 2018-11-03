@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script>
+        /*
+        Crear un objeto literal persona con nombre y edad 
+        y una método que determine si es mayor de edad o no.
+        */
+        var persona01 = {
+            nombre: "Alejandra",
+            edad: 3,
+            esMayorEdad: function () {
+                return (this.edad >= 18) ? true : false;
+
+                /*if (this.edad >= 18)
+                    return true;
+                else return false;*/
+            }
+        }
+        /*Crear una función constructora que permita crear objetos 
+        del tipo personas pasándole solo un nombre y edad, agregar el método.
+        */
+        function ConstructorPersona(_nombre, _edad) {
+            this.nombre = _nombre,
+            this.edad = _edad,
+            this.esMayorEdad = function () {
+                return (this.edad >= 18) ? true : false;
+            }
+        }
+        //Crear un array que contenga varios objetos persona
+        var arrayPersonas = new Array();
+
+        /*
+        Crear una función que reciba el array y devuelva 
+        la edad promedio del grupo de personas.
+        */
+        function ObtenerPromedioEdad(personas) {
+            var r = personas.reduce(ReduceObtenerPromedio);
+            
+            return r;//promedio de edades
+        }
+
+        function ReduceObtenerPromedio(total, item, index, vector) {
+            debugger;
+            if (index == 1)
+                total = total.edad;
+
+            if (index == vector.length - 1)
+                return (total + item.edad) / vector.length;
+            else
+                return total + item.edad;
+        }
+
+        function cargarPersonas() {
+            //Cargar personas al vector
+            arrayPersonas.push(new ConstructorPersona("Alejandra", 3));
+            arrayPersonas.push(new ConstructorPersona("Carlos", 32));
+            arrayPersonas.push(new ConstructorPersona("Paola", 25));
+        }
+
+        function main() {
+            debugger;
+            
+            cargarPersonas();
+            document.getElementById("midDiv").innerText= ObtenerPromedioEdad(arrayPersonas);
+        }
+    </script>
+</head>
+<body>
+    <input type="button" onclick=" main()" value="Probar " />
+    <br />
+    Promedio de edad es <div id="midDiv"></div>
+
+</body>
+</html>

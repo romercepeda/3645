@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html>
+<body>
+
+    <p>Click the button to list all the items in the array.</p>
+    <button onclick="testForEach()">Try it</button>
+    <button onclick="evaluarEdades()">Try it</button>
+    <p id="demo"></p>
+
+    <script>
+demoP = document.getElementById("demo");
+var numbers = [4, 9, 16, 25];
+var personas = [{ nombre: "ale", edad: 3 }, { nombre: "carlos", edad: 19 }, { nombre: "carlos", edad: 55 }];
+function myFunction(item, index) {
+    
+    demoP.innerHTML = demoP.innerHTML + "index[" + index + "]: " + item + "<br>";
+}
+
+function myFunctionfiltrar(item, index) {
+    
+    //demoP.innerHTML = demoP.innerHTML + "index[" + index + "]: " + item + "<br>";
+    if (item.edad >= 18)
+        return item;
+}
+function evaluarEdades() {
+    var r = personas.filter(myFunctionfiltrar);
+    debugger
+}
+function testForEach() {
+    numbers.forEach(myFunction);
+}
+
+
+        /*
+        vector.forEach(funcionP)
+        */
+
+    </script>
+
+</body>
+</html>

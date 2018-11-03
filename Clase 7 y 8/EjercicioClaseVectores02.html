@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script>
+        console.log("INICIO: Odocument.readyState: ", document.readyState);
+        function ejercicio01() {
+            var miArray = [];
+            for (var i = 0; i < 20; i++) {
+                var numeroAzar = Math.random();
+                miArray.push(numeroAzar);
+            }
+            console.log(miArray);
+        }
+
+        function modelarDOM() {
+            document.getElementsByClassName("miClass");
+        }
+
+    </script>
+
+</head> 
+<body onload="console.log('fuera del body: document.readyState:', document.readyState)">
+    <div id="miId" name="miDivName" class="miClass" onclick="miEventoOnclick()">
+        <h1>Hola mundo</h1>
+    </div>
+    <div id="miId2" name="miDivName" class="miClass" onclick="miEventoOnclick()"></div>
+    <div id="miId3" name="miDivName" class="miClass" onclick="miEventoOnclick()"></div>
+    <script>
+    console.log("FIN: Odocument.readyState: ", document.readyState);
+    </script>
+</body>
+
+</html>

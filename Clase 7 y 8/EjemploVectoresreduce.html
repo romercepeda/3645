@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html>
+<body>
+
+    <p>Click the button to get the sum of the numbers in the array.</p>
+    <button onclick="myFunction()">Try it</button>
+
+    <p>Sum of numbers in array: <span id="demo"></span></p>
+
+    <script>
+        var numbers = [65, 44, 12, 4];
+
+        function getSum(total, num, index, array) {
+            debugger;
+            if (index == array.length - 1)
+                return (total + num) / array.length;
+            else
+                return total + num;
+        }
+        function myFunction(item) {
+            var r = numbers.reduce(getSum);
+            document.getElementById("demo").innerHTML = r;
+        }
+    </script>
+
+</body>
+</html>
