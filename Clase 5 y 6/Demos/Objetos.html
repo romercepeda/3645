@@ -15,7 +15,14 @@
             color: "Rojo",
             anio: 2017,
             encender: function () {
+
+                function enceddido01() {
+
+                    console.log("This dentro: " + this);
+                }
+                console.log("This fuera: " + this);
                 console.log("encender-Run run run....");
+                enceddido01();
             },
             detener: function (encenderLueces) {
                 console.log("detener-Carro detenido");
@@ -23,8 +30,13 @@
 
             },
             encerLucesTraceras: function () {
+                
                 console.log("encerLucesTraceras-Luces traceras encendidas");
             },
+            valorImpuesto: function () {
+
+                return this.anio * 100;
+            }
         };
 
         //Creacion de objetos con un Constructor
@@ -62,6 +74,7 @@
                 if (encenderLueces == true) this.encerLucesTraceras();
             }
             this.encerLucesTraceras = function () {
+                debugger;
                 console.log("encerLucesTraceras-Luces traceras encendidas");
             }
         }
@@ -80,6 +93,15 @@
 
         //Propiedades calculadas
         var propName = "prop_42";   
+
+        //Constructor de objetos
+        function ConstruirVehciulo(_marca, _modelo, _anio) {
+            debugger;
+            //console.log(this);
+            this.marca = _marca;
+            this.modelo = _modelo;
+            this.encender = function () { console.log("encender vehiculo...") };
+        }
 
     </script>
 </head>

@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script>
+        /*
+# Hacer un objeto que represente un usuario
+Deberá tener las propiedades id `id` (se deberá generar uno automáticamente cuando creo el usuario), 
+nombre `firstName`, 
+apellido `lastName`, 
+edad `age`, 
+dirección `address`.
+
+Deberá tener los métodos:
+ Mostrar nombre completo `fullName`, deberá mostrar en consola el nombre completo del usuario.
+Es mayor de edad `isLegalAge` que deberá devolver `true` si tiene 18 años o más y `false` en caso contrario.
+Generar el objeto, pasando los argumentos necesarios y luego llamar a los métodos para ver como funcionan.
+Ayuda: Existe una función que devuelve un número random que nos pede servir para hacer un id.
+var time = Math.random() 
+// Esto devuelve un número del estilo 0.11296860298890499
+
+        */
+
+
+        function ConstructorUsuarios(_nombre, _apellido, _edad, _direccion) {
+            this.id = Math.random();
+            this.nombre = _nombre;
+            this.apellido = _apellido;
+            this.edad = _edad;
+            this.direccion = _direccion;
+            this.mostrarNombreCompleto = function () {
+                console.log(this.nombre + " " + this.apellido);
+            }
+            this.esMayorEdad = function () {
+                console.log("Es mayor de edad? ");
+                if (this.edad > 18)
+                    console.log(true);
+                else
+                    console.log(false);
+                
+            }
+            
+
+
+        }
+        function ConstructorUsuarios2(_nombre, _apellido, _edad, _direccion) {
+    
+            var newId = Math.random();
+
+            function mostrarNombreCompleto() {
+                console.log(this.nombre + " " + this.apellido);
+            }
+            function esMayorEdad() {
+                console.log("Es mayor de edad? ");
+                if (this.edad > 18)
+                    console.log(true);
+                else
+                    console.log(false);
+
+            }
+
+            return {
+                id: newId,
+                nombre: _nombre,
+                apellido: _apellido,
+                edad: _edad,
+                direccion: _direccion,
+                mostrarNombreCompleto : mostrarNombreCompleto,
+                esMayorEdad : esMayorEdad,
+            }
+
+
+        }
+
+
+        var usuario01 = new ConstructorUsuarios("Alejandra", "Castro", 20, "Sarmiento 2020, CABA");
+        usuario01.mostrarNombreCompleto();
+        usuario01.esMayorEdad();
+        debugger;
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
