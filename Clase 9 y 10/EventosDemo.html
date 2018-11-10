@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script>
+        
+        function myfunction() {
+            debugger;
+            
+        
+        }
+        function myfunction02() {
+            debugger;
+
+
+        }
+        function main() {
+            var miObj = document.getElementById("miInput02");
+            miObj.addEventListener("click", myfunction);
+            miObj.addEventListener("click", function () {
+                debugger;
+                myfunction02();
+            });
+
+        }
+    </script>
+</head>
+<body onload="main()">
+    <input id="miInput01" type="button" name="name" value="click me" onclick="myfunction(); " />
+    <input type="text" name="name" value="" onfocusin="myfunction()" onfocus="myfunction02()" />
+
+    <input id="miInput02" type="button" name="name" value="click me 02"/>
+    <!--    
+        <div id="midiv01" onmouseenter="myfunction()">Click Me</div>
+    -->
+    
+</body>
+</html>

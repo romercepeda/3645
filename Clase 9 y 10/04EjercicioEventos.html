@@ -1,0 +1,131 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0064)https://www.arkaitzgarro.com/javascript/snippets/cap18/ej21.html -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>Ejercicio 21 - Validación de formularios</title>
+
+    <style type="text/css">
+    body {font-family: arial, helvetica;}
+    form {
+        width: 600px;
+        margin: 20px auto 0 auto;
+    }
+    label {
+        float: left;
+        width: 200px;
+        font-weight: bold;
+    }
+    label[for="registro_condiciones"] {
+        float: none;
+    }
+    input[type="text"],
+    input[type="password"],
+    textarea {
+        width: 360px;
+    }
+    input[type="checkbox"] {
+        margin-left: 200px;
+    }
+    input[type="submit"] {
+        margin: 20px 0 0 200px;
+        display: block;
+    }
+    </style>
+    <script> 
+        /*
+        -Setear required in El nombre, email y comentarios
+        -En evento blur (focusOn) Campo que no cumpla setear title con mensaje.
+        */
+        document.onreadystatechange = function () {
+            if (document.readyState == "complete") {
+                var imputNombre = document.getElementById("registro_nombre");
+                var imputMail = document.getElementById("registro_email");
+                var imputComentario = document.getElementById("registro_comentarios");
+                var imputPassword = document.getElementById("registro_password");
+
+                //Seteamos atributos requeridos y de longitud.
+                imputNombre.setAttribute("required", "");
+                imputMail.setAttribute("required", "");
+                imputComentario.setAttribute("required", "");
+                imputComentario.setAttribute("maxlength", "50");
+                imputPassword.setAttribute("minlength", "6");
+
+                //Seteamos una funcion al onblur de los objetos
+                imputMail.addEventListener("blur", EvaluarMail);
+                imputComentario.addEventListener("blur", EvaluarComentarios);
+                imputPassword.addEventListener("blur", EvaluarPassword);
+
+                //Seteamos el Onsubmit para la evaluacion final del Formualrio.
+                document.forms[0].onsubmit = EvaluarFormulario;
+            }
+        }
+        function EvaluarMail() {
+            //Evaluar mail.
+            var mmiObj = document.getElementById("registro_email");
+            var r = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/.test(mmiObj.value);
+            //Si falla =>  agregar title y borrar valor
+            if (r == false) {
+                //this.setAttribute("title", "El mail es invalido");
+                document.querySelector("label[for=registro_email]").innerText = "Email: *";
+                mmiObj.value = "";
+                return false;
+            } else {
+                document.querySelector("label[for=registro_email]").innerText = "Email:";
+                return true;
+            }
+                
+        }
+        function EvaluarComentarios() {
+            var mmiObj = document.getElementById("registro_comentarios");
+            var str = mmiObj.value.length
+            if (str > 50) {
+                document.querySelector('label[for=registro_comentarios]').innerHTML = 'Comentarios: *MAX 50 caracteres'
+                mmiObj.value = '';
+                return false;
+            } else {
+                document.querySelector('label[for=registro_comentarios]').innerHTML = 'Comentarios:'
+                return true;
+            }
+        }
+        function EvaluarPassword() {
+            var mmiObj = document.getElementById("registro_password");
+            var r = /^(?=(?:.*\d))(?=(?:.*[A-Z]))(?=(?:.*[a-z]))\S{6,}$/.test(mmiObj.value);
+            //var r  = /^([a-z]+)([A-Z]+)([0-9]+)$/.test(this.value);
+            if (r == true && mmiObj.value.length >= 6){
+                document.querySelector("label[for=registro_password]").innerText = "Password:";
+                return true;
+            }
+            else{
+                document.querySelector("label[for=registro_password]").innerText = "Password: *";
+                mmiObj.value = "";
+                return false;
+            }
+        }
+
+        function EvaluarFormulario() {
+            //Retornamos false para cancelar el submit
+            if (EvaluarMail() == false) return false;
+            if (EvaluarComentarios() == false) return false;
+            if (EvaluarPassword() == false) return false;
+
+            //Si todo estan bien
+            return true;
+        }
+    </script>
+</head>
+
+<body>
+    <form action="https://www.arkaitzgarro.com/javascript/snippets/cap18/servidor.php" method="POST" id="registro" >
+        <fieldset>
+            <legend>Registro</legend>
+            <label for="registro_nombre">Nombre:</label><input type="text" name="nombre" id="registro_nombre">
+            <label for="registro_apellidos">Apellido:</label><input type="text" name="apellido" id="registro_apellido">
+            <label for="registro_email">Email:</label><input type="text" name="email" id="registro_email">
+            <label for="registro_password">Password:</label><input type="text" name="password" id="registro_password">
+            <label for="registro_comentarios">Comentarios:</label><textarea name="comentarios" id="registro_comentarios" rows="10"></textarea>
+            <input type="checkbox" name="condiciones" id="registro_condiciones" value="1"><label for="registro_condiciones">Acepto las condiciones del servicio.</label>
+            <input type="submit" value="Enviar">
+        </fieldset>
+    </form>
+
+</body></html>

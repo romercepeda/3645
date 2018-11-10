@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0064)https://www.arkaitzgarro.com/javascript/snippets/cap18/ej18.html -->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    
+    <title>Ejercicio 18 - Información sobre eventos</title>
+    
+    <style type="text/css">
+        body {
+            font-family: arial, helvetica;
+        }
+
+        .box {
+            width: 160px;
+            height: 160px;
+            border: thin solid silver;
+            padding: .5em;
+            float: left;
+            margin-right: 15px;
+        }
+
+            .box h1 {
+                margin: 0;
+            }
+    </style>
+
+    <script src="lib\jquery-3.3.1.js" type="text/javascript"></script>
+
+    <script>
+        
+        $(document).ready(function () {
+            //if (document.readyState == "complete") {
+                //Asocio al evento "onmousemove" la funcion  MovimientoMuse
+
+                document.addEventListener("mousemove", MovimientoMuse);
+                //Otra forma de escribirlo;
+                //Considerar (limitantes) ejempli: no podria remover, no podria asociar mas de una funcion...
+                //document.onmousemove = MovimientoMuse;
+                document.addEventListener("keydown", TeclaPresionada);
+                document.addEventListener("click", cambiarColorMouse);
+            //}
+        });
+        function cambiarColorMouse() {
+            //var miDiv = document.getElementById("raton");
+            //miDiv.style.backgroundColor = "#FFFFCC";
+            $("#raton")[0].style.backgroundColor = "#FFFFCC";
+        }
+        function MovimientoMuse() {
+            debugger;
+            var miDiv = document.getElementById("raton");
+            var coordNavegador = {
+                x: event.screenX,
+                y: event.screenY
+            }
+            var coorPage = {
+                x: event.pageX,
+                y: event.pageY
+            }
+            miDiv.getElementsByTagName("div")[0].innerHTML =
+                "<div>Navegador [" + coordNavegador.x + "," + coordNavegador.y + "]</div> " +
+                "<div>Pagina  [" + coorPage.x + "," + coorPage.y + "]</div> ";
+            
+
+            miDiv.style.backgroundColor = "#fff";
+            var miDiv2 = document.getElementById("teclado");
+            miDiv2.style.backgroundColor = "#fff";
+        }
+        function TeclaPresionada() {
+            var miDiv = document.getElementById("teclado");
+            var info = {
+                caracter: event.key,
+                code: event.key.charCodeAt(0),
+            }
+            miDiv.getElementsByTagName("div")[0].innerHTML =
+            "<div>Tecla [" + info.caracter + "]</div> " +
+            "<div>Codigo  [" + info.code + "]</div> ";
+            miDiv.style.backgroundColor = "#CCE6FF";
+        }
+    </script>
+</head>
+<body>
+    <div id="raton" class="box">
+        <h1>Ratón</h1>
+        <div></div>
+    </div>
+    <div id="teclado" class="box">
+        <h1>Teclado</h1>
+        <div></div>
+    </div>
+
+</body>
+</html>
