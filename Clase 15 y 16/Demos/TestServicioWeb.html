@@ -1,0 +1,162 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Hello jQuery</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script>
+        function testServicoXMLHttpNativo() {
+            //consume el servicio: http://rest-service.guides.spring.io/greeting
+            var xhttp;
+            if (window.XMLHttpRequest) {
+                // code for modern browsers
+                xhttp = new XMLHttpRequest();
+            } else {
+                // code for IE6, IE5
+                xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xhttp.onreadystatechange = function () {
+                debugger;
+                if (this.readyState == 4 && this.status == 200) {
+                    debugger;
+                    var data = JSON.parse(this.responseText);
+                    document.getElementsByClassName('greeting-id')[0].innerText += " " + data.id;
+                    document.getElementsByClassName('greeting-content')[0].innerText += " " + data.content;
+
+                }
+            };
+            //open(method, url, async, user, psw)
+            xhttp.open("GET", "http://rest-service.guides.spring.io/greeting", true);
+            //Send the request to server
+            xhttp.send();
+        }
+        function testServicoXMLHttpNativo2() {
+            var xhttp = new XMLHttpRequest();
+            xhttp.open("GET", "http://rest-service.guides.spring.io/greeting", false);
+            xhttp.send();
+            var datosRecibidos = JSON.parse(xhttp.responseText);
+            document.getElementsByClassName('greeting-id')[0].innerText += " " + datosRecibidos.id;
+            document.getElementsByClassName('greeting-content')[0].innerText += " " + datosRecibidos.content;
+        }
+        function testServiciByAjax() {
+            //Consuming a RESTful Web Service with jQuery
+            //Reference: https://spring.io/guides/gs/consuming-rest-jquery/
+            $(document).ready(function () {
+                $.ajax({
+                    url: "http://rest-service.guides.spring.io/greeting"
+                }).then(function (datosRecibidos) {
+                    //Especifica la accion una vez completado el query
+                    debugger
+                    document.getElementsByClassName('greeting-id')[0].innerText = "Desde testServiciByAjax " + datosRecibidos.id;
+                    document.getElementsByClassName('greeting-content')[0].innerText = " " + datosRecibidos.content;
+                });
+            });
+        }
+        function recibeDatosDe_testServiciByAjaxGet(datosRecibidos, status, xhr) {
+            debugger
+            document.getElementsByClassName('greeting-id')[0].innerText = "Desde testServiciByAjaxGet: " + datosRecibidos.id;
+            document.getElementsByClassName('greeting-content')[0].innerText = " " + datosRecibidos.content;
+        }
+        function testServiciByAjaxGet() {
+            //Consuming a RESTful Web Service with jQuery
+            //Reference: http://rest-service.guides.spring.io/greeting
+            $.get("http://rest-service.guides.spring.io/greeting", recibeDatosDe_testServiciByAjaxGet, "json")
+        }
+        
+        function testServiceByAjax2() {
+
+            $.ajax(
+                {
+                    type: "get",//VErbo
+                    dataType: "json",
+                    async:true, 
+                    url: "http://rest-service.guides.spring.io/greeting",
+                    success: nombrefunction, //Cuando la peticion es correcta
+                    error: nombreFuncion //cuando da error la peticion
+                }
+                );
+
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                async: false,
+                url: "http://rest-service.guides.spring.io/greeting",
+                success: function (data) {
+                    $('.greeting-id').append(data.id);
+                    $('.greeting-content').append(data.content);
+                },
+                error: function () {
+                    alerr("Error..")
+                }
+            });
+            debugger;
+            alert("Hola");
+        }
+
+
+        //Ejemplo para mirar error en Network del navegador.
+        function testServiceByAjax3() {
+            $.support.cors = true;
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                async: false,
+                url: "http://www.webservicex.net/globalweather.asmx/GetCitiesByCountry",//?CountryName=Argentina
+                success: function (datosRecividos) {
+                    debugger;
+                    $('.greeting-id').append(data.id);
+                    $('.greeting-content').append(data.content);
+                },
+                error: function (a, b, c) {
+                    alert("Error..")
+                }
+            });
+            debugger;
+            alert("Hola");
+        }
+
+        function createCORSRequest(method, url) {
+            var xhr = new XMLHttpRequest();
+            if ("withCredentials" in xhr) {
+                // XHR has 'withCredentials' property only if it supports CORS
+                xhr.open(method, url, true);
+            } else if (typeof XDomainRequest != "undefined") { // if IE use XDR
+                xhr = new XDomainRequest();
+                xhr.open(method, url);
+            } else {
+                xhr = null;
+            }
+            return xhr;
+        }
+        function testCross() {
+            var request = createCORSRequest("get", "http://www.webservicex.net/globalweather.asmx/GetCitiesByCountry?CountryName=Argentina");
+            if (request) {
+                // Define a callback function
+                request.onload = function (data) { alert(data) };
+                request.onerror = function (a,b,c) {
+                    debugger;
+                    alert("error");
+                }
+                // Send request
+                request.send();
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <input type="button" name="TestServicioNativo" value="Probar Servicio Con XMLHttp Nativo" onclick="testServicoXMLHttpNativo()"/>
+
+    <input type="button" name="TestServicio" value="Probar Servicio Con Ajax Jquery 01 " onclick="testServiciByAjax()" />
+    <input type="button" name="TestServicio" value="Probar Servicio Con Ajax Jquery GET " onclick="testServiciByAjaxGet()" />
+    <input type="button" name="TestServicio" value="Probar Servicio Con Ajax Jquery 02" onclick="testServiceByAjax2()" />
+
+
+    <input type="button" name="TestServicio" value="Probar Servicio Con Ajax Jquery" onclick="testServiceByAjax3()" />
+
+    <input type="button" name="TestServicio" value="Probar Servicio Con Ajax Jquery" onclick="testCross()" />
+    <div>
+        <p class="greeting-id">The ID is </p>
+        <p class="greeting-content">The content is </p>
+    </div>
+</body>
+</html>

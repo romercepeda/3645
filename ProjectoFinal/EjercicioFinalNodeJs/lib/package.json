@@ -1,0 +1,18 @@
+{
+  "name": "estudiarnode",
+  "version": "1.0.0",
+  "description": "para estudiar",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Romer epeda",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.2",
+    "jade": "^1.11.0",
+    "xhr-request": "^1.1.0",
+    "xmlhttprequest": "^1.8.0"
+  }
+}

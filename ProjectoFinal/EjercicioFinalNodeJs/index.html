@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="lib\jquery-3.3.1.js"></script>
+    <script>
+        function listener(datos) {
+            debugger;
+            console.log(datos);
+        }
+        function CargarDatos() {
+
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                //timeout: 10000 ,
+                
+                contentType: "application/json",
+                async: false,
+                url: "https://swapi.co/api/people/",
+                
+                success: listener,
+                error: function (a, b, c) {
+                    debugger;
+                    // alert("Error..")
+                }
+            });
+
+        }
+
+        function request2(url, cb) {
+            url = "https://swapi.co/api/people/?format=json";
+            // "http://localhost:8080/peoples";
+
+            var oReq;
+
+            function listenerOr(e) {
+                if (oReq.readyState != 4 && e.type !== 'load') return;
+                if (oReq.status && oReq.status != 200) {
+                    //this will be the error handler
+                } else {
+                    debugger;
+                    cb(JSON.parse(oReq.responseText));
+                }
+            }
+
+            // Use XDomainRequest if it's available (to support IE<10)
+            if (window.XDomainRequest) {
+                oReq = new XDomainRequest();
+                oReq.open('get', url, true);
+
+                // Update the timeout to 30 seconds for XDomainRequests.
+                oReq.timeout = 30000;
+            } else {
+                oReq = new XMLHttpRequest();
+                oReq.open('get', url, true);
+                oReq.setRequestHeader('User-Agent', 'swapi-javascript');
+                oReq.setRequestHeader('Accept', 'application/json');
+                //oReq.setRequestHeader('NombreAtributo', 'clave');
+            }
+            oReq.onload = listenerOr;
+
+            // Wrap in a 0 millisecond timeout.
+            // XDomainRequests appear to randomly fail unless kicked into a new scope.
+            setTimeout(function () {
+                oReq.send();
+            }, 0);
+        }
+    </script>
+</head>
+<body onload="CargarDatos()">
+    hola mundo..
+</body>
+</html>
